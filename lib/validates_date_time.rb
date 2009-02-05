@@ -113,7 +113,7 @@ module ValidatesDateTime
     def validate_before_and_after_restrictions(record, attr_name, value, options)
       if options[:before]
         options[:before].each do |r|
-          if r.value(record) and value >= r.last_value
+          if r.value(record) and value > r.last_value
             record.errors.add(attr_name, options[:before_message] % r)
             break
           end
@@ -122,7 +122,7 @@ module ValidatesDateTime
       
       if options[:after]
         options[:after].each do |r|
-          if r.value(record) and value <= r.last_value
+          if r.value(record) and value < r.last_value
             record.errors.add(attr_name, options[:after_message] % r)
             break
           end
